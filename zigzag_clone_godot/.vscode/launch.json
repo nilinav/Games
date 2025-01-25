@@ -13,7 +13,7 @@
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false,
-            "args": ["--path","${workspaceRoot}"]
+            "args": ["--path","${workspaceFolder}"]
         }
     ]
 }
