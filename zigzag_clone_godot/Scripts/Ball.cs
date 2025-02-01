@@ -3,16 +3,44 @@ using System;
 
 public partial class Ball : Node2D
 {
-	public int speed = 10;
+	private CharacterBody2D BallCharacterBody2D;
+	private Vector2 velocity = new Vector2(); 
+	private int Speed;
 	 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		BallCharacterBody2D = GetNode<CharacterBody2D>("CharacterBody2D");
+		
+		velocity.X = 0;
+		Speed = 200;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		
+		Movement(BallCharacterBody2D, (float)delta);
+	}
+	private void Movement(CharacterBody2D BallCharacterBody2D, float delta)
+	{
+
+
+		if (Input.IsActionJustPressed("ui_accept"))
+		{
+
+			if(velocity.X <= 0)
+			{
+				velocity.X = 1;
+				return;
+			}
+			if(velocity.X > 0)
+			{
+				velocity.X = -1;
+				return;
+			}
+		}
+
+
+        velocity = velocity.Normalized() * Speed * delta ;
+		BallCharacterBody2D.Position += velocity;
+	
 	}
 }
